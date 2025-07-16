@@ -1,0 +1,17 @@
+name = "real_ineq"
+version = "0.1.0"
+defaultTargets = ["real_ineq"]
+
+[[lean_lib]]
+name = "RealIneq"
+
+[[lean_lib]]
+name = "Examples"
+
+[[lean_exe]]
+name = "real_ineq"
+root = "Main"
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
