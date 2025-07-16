@@ -22,7 +22,7 @@ theorem prob0 : ∀ x a b c : ℝ, ((((a * x^2) + (b * x) + c) = 0) → (((b * b
 
   --  cone cofactors (sums of squares)
     let cone_cf_0 : ℝ := ((1) * ((1) * (((2 * (a * x)) + b))^2))
-    have h_cone_cf_0_nonneg : cone_cf_0 ≥ 0 := by unfold cone_cf_0; norm_num; first | positivity | linarith
+    have h_cone_cf_0_nonneg : cone_cf_0 ≥ 0 := by unfold cone_cf_0; first | positivity | linarith
 
   --  monoid cofactors (products of non-equalities)
     let monoid_cf_0 : ℝ := (0 - ((b * b) - ((4 * a) * c)))

@@ -28,13 +28,13 @@ theorem prob6 : ∀ a b c x: ℝ, a ≥ 0 → b ≥ 0 → c ≥ 0 → c * (2 * a
 
   --  cone cofactors (sums of squares)
     let cone_cf_0 : ℝ := (((((c * (a ^ 2)) * b) - x) * (1)) * ((1/26) * (1)^2))
-    have h_cone_cf_0_nonneg : cone_cf_0 ≥ 0 := by unfold cone_cf_0; norm_num; first | positivity | linarith
+    have h_cone_cf_0_nonneg : cone_cf_0 ≥ 0 := by unfold cone_cf_0; first | positivity | linarith
     let cone_cf_1 : ℝ := (((0 - ((c * (((2 * a) + b) ^ 3)) - (27 * x))) * (1)) * ((1/26) * (1)^2))
-    have h_cone_cf_1_nonneg : cone_cf_1 ≥ 0 := by unfold cone_cf_1; norm_num; first | positivity | linarith
+    have h_cone_cf_1_nonneg : cone_cf_1 ≥ 0 := by unfold cone_cf_1; first | positivity | linarith
     let cone_cf_2 : ℝ := ((b * (c * (1))) * ((1/26) * (((-1 * a) + b))^2))
-    have h_cone_cf_2_nonneg : cone_cf_2 ≥ 0 := by unfold cone_cf_2; norm_num; first | positivity | linarith
+    have h_cone_cf_2_nonneg : cone_cf_2 ≥ 0 := by unfold cone_cf_2; first | positivity | linarith
     let cone_cf_3 : ℝ := ((a * (c * (1))) * ((4/13) * (((-1 * a) + b))^2))
-    have h_cone_cf_3_nonneg : cone_cf_3 ≥ 0 := by unfold cone_cf_3; norm_num; first | positivity | linarith
+    have h_cone_cf_3_nonneg : cone_cf_3 ≥ 0 := by unfold cone_cf_3; first | positivity | linarith
 
   --  monoid cofactors (products of non-equalities)
     let monoid_cf_0 : ℝ := (((c * (a ^ 2)) * b) - x)

@@ -1,3 +1,6 @@
+/-This example is from a junor Math competition (JBMO),
+we showcase the imandra-geo ability to close the goal and compare with a Lean-user's manual proof.-/
+
 import Mathlib
 import RealIneq.Horn
 
@@ -29,9 +32,9 @@ theorem ex3_imandra (a : ℝ) (ha : 0 < a) (h : a^3 = 6 * (a + 1)) :
 
   --  cone cofactors (sums of squares)
     let cone_cf_0 : ℝ := ((1) * (((8) * ((((-3 / 8) * a) + 1))^2) + ((3/8) * ((a + (2 * x)))^2)))
-    have h_cone_cf_0_nonneg : cone_cf_0 ≥ 0 := by unfold cone_cf_0; norm_num; first | positivity | linarith
+    have h_cone_cf_0_nonneg : cone_cf_0 ≥ 0 := by unfold cone_cf_0; first | positivity | linarith
     let cone_cf_1 : ℝ := (((0 - (0 - a)) * (1)) * ((1) * ((a + (2 * x)))^2))
-    have h_cone_cf_1_nonneg : cone_cf_1 ≥ 0 := by unfold cone_cf_1; norm_num; first | positivity | linarith
+    have h_cone_cf_1_nonneg : cone_cf_1 ≥ 0 := by unfold cone_cf_1; first | positivity | linarith
 
   --  monoid cofactors (products of non-equalities)
 
