@@ -27,6 +27,7 @@ partial def exprToSexpr_inner (e : Expr) : MetaM String := do
     | ``HDiv.hDiv, #[_, _, _, _, a, b] => return paren s!"/ {← exprToSexpr_inner a} {← exprToSexpr_inner b}"
     | ``HPow.hPow, #[_, _, _, _, a, b] => return paren s!"EXPT {← exprToSexpr_inner a} {← exprToSexpr_inner b}"
     | ``Neg.neg, #[_, _, a]            => return paren s!"- {← exprToSexpr_inner a}"
+    | ``Real.sqrt, #[a]                => throwError "Real.sqrt is not supported"
     | ``Eq, #[_, a, b]                 => return paren s!"= {← exprToSexpr_inner a} {← exprToSexpr_inner b}"
     | ``Ne, #[_, a, b]                 => return paren s!"NEQ {← exprToSexpr_inner a} {← exprToSexpr_inner b}"
     | ``LT.lt, #[_, _, a, b]           => return paren s!"< {← exprToSexpr_inner a} {← exprToSexpr_inner b}"

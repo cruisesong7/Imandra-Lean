@@ -11,5 +11,11 @@ theorem unknown_hyp_example (x : Real) (h1 : x > 0) : x + 1 > 1 := by
   sorry
 
 theorem no_hyp_example : ∀ x : Real, x ≥ x := by
+  intro x
+  -- horn
+  sorry
+
+theorem unsupported_example : ∀ x : Real, √x ≥ √x := by
+  intro x
   -- horn
   sorry
