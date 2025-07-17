@@ -1,3 +1,11 @@
+/-
+Copyright (c) 2025 Congyan (Cruise) Song.
+Released under the Apache License v2.0; see LICENSE for full text.
+
+A Lean4 tactic that converts Lean's real arithmetic expression into S-expression of Horn clauses
+Author : C.Song, Georgia Tech
+-/
+
 import Lean
 import Mathlib
 
@@ -82,16 +90,17 @@ syntax (name := hornNoHyps) "horn" : tactic
 
 @[tactic hornWithHyps]
 def evalHornWithHyps : Tactic := fun stx => do
-  let mvarId ← getMainGoal
-  let hyps := stx[2].getSepArgs
-  let hypExprs ← hyps.mapM fun hyp => do
-    let expr ← elabTerm hyp none
-    let type ← inferType expr
-    let typeOfType ← inferType type
-    unless (← isDefEq typeOfType (mkSort levelZero)) do
-      throwTacticEx `horn mvarId m!"proposition expected{indentD expr}\nhas type{indentD type}"
-    return type
-  hornImpl hypExprs
+  withMainContext do
+    let mvarId ← getMainGoal
+    let hyps := stx[2].getSepArgs
+    let hypExprs ← hyps.mapM fun hyp => do
+      let expr ← elabTerm hyp none
+      let type ← inferType expr
+      let typeOfType ← inferType type
+      unless (← isDefEq typeOfType (mkSort levelZero)) do
+        throwTacticEx `horn mvarId m!"proposition expected{indentD expr}\nhas type{indentD type}"
+      return type
+    hornImpl hypExprs
 
 @[tactic hornAll]
 def evalHornAll : Tactic := fun _stx => do
@@ -108,7 +117,7 @@ def evalHornNoHyps : Tactic := fun _stx => do
 -- Example of how to use the new tactic forms.
 theorem my_example (x y : Real) (h1 : x > 0) (h2 : y > 0) : x + y > 0 := by
   -- This call uses the `horn [...]` syntax with an explicit list
-  -- horn [h1, h2]
+  horn [h1, h2]
 
   -- This call uses the new `horn_all` syntax to automatically use h1 and h2
   horn_all
