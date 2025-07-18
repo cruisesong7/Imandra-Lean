@@ -17,7 +17,7 @@ theorem ex5_imandra (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c)
     3 ≤ (a + b) / (1 + b) + (b + c) / (1 + c) + (c + a) / (1 + a) := by
     field_simp
     rw[le_div_iff₀ (by positivity)]
-    horn[ha, hb, hc, hsum]
+    horn_all
     have imandra_proof : ∀ a b c : ℝ, ((0 ≤ a) → (0 ≤ b) → (0 ≤ c) → (((a + b) + c) = 3) → ((3 * (((1 + b) * (1 + c)) * (1 + a))) ≤ (((((a + b) * (1 + c)) + ((b + c) * (1 + b))) * (1 + a)) + ((c + a) * ((1 + b) * (1 + c)))))) := by
       intros a b c
       by_contra! goal
@@ -62,6 +62,7 @@ theorem ex5_imandra (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c)
       have h_cert_contra : cert ≠ 0 := by unfold cert; positivity
 
       tauto
+
     simp_all
 
 ------------------------------------------------------------------------------------

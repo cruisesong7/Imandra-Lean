@@ -113,12 +113,3 @@ def evalHornAll : Tactic := fun _stx => do
 @[tactic hornNoHyps]
 def evalHornNoHyps : Tactic := fun _stx => do
   hornImpl #[]
-
--- Example of how to use the new tactic forms.
-theorem my_example (x y : Real) (h1 : x > 0) (h2 : y > 0) : x + y > 0 := by
-  -- This call uses the `horn [...]` syntax with an explicit list
-  horn [h1, h2]
-
-  -- This call uses the new `horn_all` syntax to automatically use h1 and h2
-  horn_all
-  sorry
