@@ -24,10 +24,13 @@ The workflow is straightforward:
 
 ### Installation
 
-To add `Horn` to your Lean project, add the following line to your `lakefile.lean`:
+To add `Horn` to your Lean project, add the following line to your `lakefile.toml`:
 
 ```lean
-require horn from git "[https://github.com/](https://github.com/)<your-github-username>/horn" @ "main"
+[[require]]
+name = "real_ineq"
+git = { url = "https://github.com/cruisesong7/Imandra-Lean.git", subDir = "real_ineq" }
+rev = "main"
 ```
 
 ## Usage
