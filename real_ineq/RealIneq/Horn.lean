@@ -12,6 +12,14 @@ import Mathlib
 open Lean Meta Elab Tactic
 set_option linter.unusedTactic false
 
+-- Helper function to replace Unicode subscript characters with ASCII numbers.
+def replaceSubscripts (s : String) : String :=
+  s.map fun c =>
+    match c with
+    | '₀' => '0' | '₁' => '1' | '₂' => '2' | '₃' => '3' | '₄' => '4'
+    | '₅' => '5' | '₆' => '6' | '₇' => '7' | '₈' => '8' | '₉' => '9'
+    | _   => c
+
 -- This is the recursive part of the translator. It handles the content of expressions.
 partial def exprToSexpr_inner (e : Expr) : MetaM String := do
   let paren s := s!"({s})"
@@ -41,7 +49,9 @@ partial def exprToSexpr_inner (e : Expr) : MetaM String := do
       let argsSexpr ← args.mapM exprToSexpr_inner
       return paren s!"{fnName} {String.intercalate " " argsSexpr.toList}"
 
-  | .fvar id => return s!"{← id.getUserName}"
+  | .fvar id =>
+    let userName ← id.getUserName
+    return replaceSubscripts userName.toString
   | .lit l =>
       match l with
       | .natVal n => return s!"{n}"
