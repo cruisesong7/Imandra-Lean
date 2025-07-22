@@ -49,9 +49,9 @@ theorem ex4_imandra (AB BC CA AX XY BX XC: ℝ )(hside : AB > 0 ∧ BC > 0 ∧ C
 
     --  monoid cofactors (products of non-equalities)
       let monoid_cf_0 : ℝ := xy
-      have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; linarith
+      have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; positivity
       let monoid_cf_1 : ℝ := ((4 * (ax * xy)) - ((xy + ax) * bc))
-      have h_monoid_cf_1_pos : monoid_cf_1 > 0 := by unfold monoid_cf_1; linarith
+      have h_monoid_cf_1_pos : monoid_cf_1 > 0 := by unfold monoid_cf_1; positivity
 
     --  Proofs for ideal products being zero
       have h_ideal_prod_0_zero : ideal_cf_0 * prob6 = 0 := by simp [prob6]; right; linarith

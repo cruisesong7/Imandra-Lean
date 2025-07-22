@@ -26,7 +26,7 @@ theorem prob0 : ∀ x a b c : ℝ, ((((a * x^2) + (b * x) + c) = 0) → (((b * b
 
   --  monoid cofactors (products of non-equalities)
     let monoid_cf_0 : ℝ := (0 - ((b * b) - ((4 * a) * c)))
-    have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; linarith
+    have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; positivity
 
   --  Proofs for ideal products being zero
     have h_ideal_prod_0_zero : ideal_cf_0 * prob0 = 0 := by simp [prob0]; right; linarith

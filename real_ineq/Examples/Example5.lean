@@ -47,7 +47,7 @@ theorem ex5_imandra (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c)
 
     --  monoid cofactors (products of non-equalities)
       let monoid_cf_0 : ℝ := ((3 * (((1 + b) * (1 + c)) * (1 + a))) - (((((a + b) * (1 + c)) + ((b + c) * (1 + b))) * (1 + a)) + ((c + a) * ((1 + b) * (1 + c)))))
-      have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; linarith
+      have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; positivity
 
     --  Proofs for ideal products being zero
       have h_ideal_prod_0_zero : ideal_cf_0 * prob3 = 0 := by simp [prob3]; right; linarith

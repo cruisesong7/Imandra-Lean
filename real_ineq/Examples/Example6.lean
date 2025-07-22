@@ -10,7 +10,8 @@ set_option linter.unusedTactic false
 /- Let $x, y, z$ be positive real numbers. Prove that:
 $$
 \frac{x+2 y}{z+2 x+3 y}+\frac{y+2 z}{x+2 y+3 z}+\frac{z+2 x}{y+2 z+3 x} \leq \frac{3}{2}
-$$ -/theorem ex6_imandra
+$$ -/
+theorem ex6_imandra
     (x y z : ℝ)
     (hx : 0 < x)
     (hy : 0 < y)
@@ -48,7 +49,7 @@ $$ -/theorem ex6_imandra
 
   --  monoid cofactors (products of non-equalities)
     let monoid_cf_0 : ℝ := (((((((x + (2 * y)) * ((x + (2 * y)) + (3 * z))) + ((y + (2 * z)) * ((z + (2 * x)) + (3 * y)))) * ((y + (2 * z)) + (3 * x))) + ((z + (2 * x)) * (((z + (2 * x)) + (3 * y)) * ((x + (2 * y)) + (3 * z))))) * 2) - (3 * ((((z + (2 * x)) + (3 * y)) * ((x + (2 * y)) + (3 * z))) * ((y + (2 * z)) + (3 * x)))))
-    have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; linarith
+    have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; positivity
 
   --  Proofs for ideal products being zero
 

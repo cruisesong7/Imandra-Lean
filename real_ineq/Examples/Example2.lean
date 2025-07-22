@@ -38,7 +38,7 @@ theorem prob6 : ∀ a b c x: ℝ, a ≥ 0 → b ≥ 0 → c ≥ 0 → c * (2 * a
 
   --  monoid cofactors (products of non-equalities)
     let monoid_cf_0 : ℝ := (((c * (a ^ 2)) * b) - x)
-    have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; linarith
+    have h_monoid_cf_0_pos : monoid_cf_0 > 0 := by unfold monoid_cf_0; positivity
 
   --  Proofs for ideal products being zero
 
