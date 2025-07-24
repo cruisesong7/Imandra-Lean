@@ -4,7 +4,7 @@ Notice that once the proof is found by Imandra, the compile time is quite fast c
 
 import Mathlib
 import RealIneq.Horn
-
+import RealIneq.NormHorn
 set_option linter.unreachableTactic false
 set_option linter.unusedTactic false
 
@@ -15,8 +15,9 @@ $$\frac{a+b}{1+b}+\frac{b+c}{1+c}+\frac{c+a}{1+a} \geq 3$$ -/
 theorem ex5_imandra (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c)
     (hsum : a + b + c = 3) :
     3 ≤ (a + b) / (1 + b) + (b + c) / (1 + c) + (c + a) / (1 + a) := by
-    field_simp
-    rw[le_div_iff₀ (by positivity)]
+    -- field_simp
+    -- rw[le_div_iff₀ (by positivity)]
+    norm_horn
     horn_all
     have imandra_proof : ∀ a b c : ℝ, ((0 ≤ a) → (0 ≤ b) → (0 ≤ c) → (((a + b) + c) = 3) → ((3 * (((1 + b) * (1 + c)) * (1 + a))) ≤ (((((a + b) * (1 + c)) + ((b + c) * (1 + b))) * (1 + a)) + ((c + a) * ((1 + b) * (1 + c)))))) := by
       intros a b c

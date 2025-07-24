@@ -57,7 +57,7 @@ partial def exprToSexpr_inner (e : Expr) : MetaM String := do
       match l with
       | .natVal n => return s!"{n}"
       | .strVal s => return s!"\"{s}\""
-  | e => throwError "Unsupported synatx"
+  | _ => throwError "Unsupported synatx"
 
 -- This helper function "flattens" a sequence of implications into a list of hypotheses and a final conclusion.
 partial def flattenImplications (e : Expr) : MetaM (List Expr × Expr) := do

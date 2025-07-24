@@ -82,6 +82,32 @@ theorem with_all_hyps (a b c : ℝ) (h1 : 0 < a) (h2 : a ≤ b) : a * c^2 ≤ b 
     (<= (* a (EXPT c 2)) (* b (EXPT c 2))))-/
 ```
 
+### 4. `norm_horn`
+
+`norm_horn` is a pre-processing tactic that simplifies inequalities before they are passed to `horn`. As Imandra-geo has some preconditions on the form of input S-experssion. Its main capabilities are:
+
+1.  **Getting rid of division**: It eliminates division by multiplying the inequality by the denominators. This may require adding new hypotheses to ensure the denominators are non-zero.
+2.  **Getting rid of square roots**: It performs a change of variables to eliminate square roots. For each `sqrt(x)`, it introduces a new variable `y`, adds the hypothesis `y ^ 2 = x`, and substitutes `x` with `y^2`. User can specify the names for new variables and hypothesis by `(vars :=[...]) (hyps :=[...])`.
+
+Note : `norm_horn` has a synatx similar to `norm_num`, and user can use `at` to specify the locations of where it applies to.
+
+```lean
+theorem norm_horn_example (x y : ℝ) (h : 0 < y) : x / y + Real.sqrt x ≥ 0 := by
+  -- norm_horn will introduce new variables and hypotheses
+  -- to eliminate division and the square root.
+  norm_horn 
+  
+  /- The goal state is transformed to something like:
+    x y : ℝ
+    hy : 0 < y
+    hx : x > 0
+    x_sqrt : ℝ := √x
+    h_sqrt_x : x_sqrt ^ 2 = x
+    ⊢ 0 ≤ x + x_sqrt * y
+  -/
+  sorry 
+```
+
 ## Examples and Imandra-geo
 
 While the Imandra-geo solver is not yet publicly released, we have included several examples in the `/Examples` directory to provide a preview of how the complete proof workflow will look.

@@ -3,6 +3,7 @@ we showcase the imandra-geo ability to close the goal and compare with a Lean-us
 
 import Mathlib
 import RealIneq.Horn
+import RealIneq.NormHorn
 
 set_option linter.unreachableTactic false
 set_option linter.unusedTactic false
@@ -19,8 +20,9 @@ theorem ex6_imandra
     (x + 2 * y) / (z + 2 * x + 3 * y) +
     (y + 2 * z) / (x + 2 * y + 3 * z) +
     (z + 2 * x) / (y + 2 * z + 3 * x) ≤ 3 / 2 := by
-  field_simp
-  rw[div_le_div_iff₀ (by positivity) (by positivity)]
+  -- field_simp
+  -- rw[div_le_div_iff₀ (by positivity) (by positivity)]
+  norm_horn
   horn_all
   have imandra_proof : ∀ x y z : ℝ, ((0 < x) → (0 < y) → (0 < z) → (((((((x + (2 * y)) * ((x + (2 * y)) + (3 * z))) + ((y + (2 * z)) * ((z + (2 * x)) + (3 * y)))) * ((y + (2 * z)) + (3 * x))) + ((z + (2 * x)) * (((z + (2 * x)) + (3 * y)) * ((x + (2 * y)) + (3 * z))))) * 2) ≤ (3 * ((((z + (2 * x)) + (3 * y)) * ((x + (2 * y)) + (3 * z))) * ((y + (2 * z)) + (3 * x)))))) := by
     intros x y z
