@@ -7,7 +7,8 @@ Author : C.Song, Georgia Tech
 -/
 
 import Lean
-import Mathlib
+import Mathlib.Data.Real.Sqrt
+import Lean.Elab.Tactic
 
 open Lean Meta Elab Tactic
 set_option linter.unusedTactic false
@@ -56,7 +57,7 @@ partial def exprToSexpr_inner (e : Expr) : MetaM String := do
       match l with
       | .natVal n => return s!"{n}"
       | .strVal s => return s!"\"{s}\""
-  | e => return paren s!"UNHANDLED {← ppExpr e}"
+  | e => throwError "Unsupported synatx"
 
 -- This helper function "flattens" a sequence of implications into a list of hypotheses and a final conclusion.
 partial def flattenImplications (e : Expr) : MetaM (List Expr × Expr) := do
