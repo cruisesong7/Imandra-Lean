@@ -92,7 +92,7 @@ theorem with_all_hyps (a b c : ℝ) (h1 : 0 < a) (h2 : a ≤ b) : a * c^2 ≤ b 
 Note : `norm_horn` has a synatx similar to `norm_num`, and user can use `at` to specify the locations of where it applies to.
 
 ```lean
-theorem norm_horn_example (x y : ℝ) (h : 0 < y) : x / y + Real.sqrt x ≥ 0 := by
+theorem norm_horn_example (x y : ℝ) (hy : 0 < y)(hx : x > 0) : x / y + Real.sqrt x ≥ 0 := by
   -- norm_horn will introduce new variables and hypotheses
   -- to eliminate division and the square root.
   norm_horn 
