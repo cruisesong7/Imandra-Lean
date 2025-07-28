@@ -3,7 +3,7 @@ we showcase the imandra-geo ability to close the goal and compare with a Lean-us
 
 import Mathlib
 import RealIneq.Horn
-
+import RealIneq.NormHorn
 set_option linter.unreachableTactic false
 set_option linter.unusedTactic false
 
@@ -11,8 +11,7 @@ set_option linter.unusedTactic false
 theorem ex4_imandra (AB BC CA AX XY BX XC: ℝ )(hside : AB > 0 ∧ BC > 0 ∧ CA > 0 ∧ AX > 0 ∧ XY > 0 ∧ BX > 0 ∧ XC > 0)
 (hBC : BC=BX+XC)(intersecting_chords : AX*XY=BX*XC):1/AX+1/XY ≥ 4/BC:=by
     rcases hside with ⟨AB_pos, BC_pos, CA_pos, AX_pos, XY_pos, BX_pos, XC_pos⟩
-    field_simp
-    rw[div_le_div_iff₀ (by positivity) (by positivity)]
+    norm_horn
     horn[AB_pos,BC_pos,CA_pos,XY_pos,BX_pos,XC_pos,hBC,intersecting_chords]
     have imandra_proof : ∀ ab ax bc bx ca xc xy : ℝ, ((ab > 0) → (bc > 0) → (ca > 0) → (xy > 0) → (bx > 0) → (xc > 0) → (bc = (bx + xc)) → ((ax * xy) = (bx * xc)) → ((4 * (ax * xy)) ≤ ((xy + ax) * bc))) := by
       intros ab ax bc bx ca xc xy
