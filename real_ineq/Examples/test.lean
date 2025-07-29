@@ -51,13 +51,13 @@ set_option linter.unusedTactic false
           (= (EXPT y 2) b)
           (= (EXPT z 2) c))
     (<= (+ (+ (* a b) (* b c)) (* c a)) (+ (+ x y) z)))-/
-open Real
-theorem inequalities_45542 (a b c : ℝ) (ha : 0 < a) (hb : 0 < b) (hc : 0 < c)
-    (h : a + b + c = 3) :
-    sqrt a + sqrt b + sqrt c ≥ a * b + b * c + c * a := by
+-- open Real
+-- theorem inequalities_45542 (a b c : ℝ) (ha : 0 < a) (hb : 0 < b) (hc : 0 < c)
+--     (h : a + b + c = 3) :
+--     sqrt a + sqrt b + sqrt c ≥ a * b + b * c + c * a := by
 
-    norm_horn (vars := [x,y,z]) (hyps := [hx,hy,hz])
-    horn_all
+--     norm_horn (vars := [x,y,z]) (hyps := [hx,hy,hz])
+--     horn_all
     -- set x := sqrt a with hx
     -- set y := sqrt b with hy
     -- set z := sqrt c with hz
@@ -99,25 +99,25 @@ theorem inequalities_45542 (a b c : ℝ) (ha : 0 < a) (hb : 0 < b) (hc : 0 < c)
 --     nlinarith [h1, h2, h3, sq_nonneg (a - b), sq_nonneg (b - c), sq_nonneg (c - a)]
 --   linarith [h4]
 
-theorem inequalities_124969 (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c)
-    (h : a + b + c ≤ 3) :
-    a / (1 + a ^ 2) + b / (1 + b ^ 2) + c / (1 + c ^ 2) ≤ 3 / 2 ∧
-    3 / 2 ≤ 1 / (1 + a) + 1 / (1 + b) + 1 / (1 + c) := by
-    constructor
-    · norm_horn
-      -- field_simp
-      -- rw[div_le_div_iff₀ (by positivity) (by positivity)]
-      ring_nf
-      simp[pow_two]
-      horn[ha,hb,hc,h]
-      sorry
-    · field_simp
-      rw[div_le_div_iff₀ (by positivity) (by positivity)]
-      horn[ha,hb,hc,h]
-      have imandra_proof : ∀ a b c : ℝ, ((0 ≤ a) → (0 ≤ b) → (0 ≤ c) → (((a + b) + c) ≤ 3) → ((3 * (((1 + a) * (1 + b)) * (1 + c))) ≤ (((((1 + b) + (1 + a)) * (1 + c)) + ((1 + a) * (1 + b))) * 2))) := by
-        intros a b c
-        by_contra! goal
-        rcases goal with ⟨h1, h2, h3, h4, h5⟩
+-- theorem inequalities_124969 (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c)
+--     (h : a + b + c ≤ 3) :
+--     a / (1 + a ^ 2) + b / (1 + b ^ 2) + c / (1 + c ^ 2) ≤ 3 / 2 ∧
+--     3 / 2 ≤ 1 / (1 + a) + 1 / (1 + b) + 1 / (1 + c) := by
+--     constructor
+--     · norm_horn
+--       -- field_simp
+--       -- rw[div_le_div_iff₀ (by positivity) (by positivity)]
+--       ring_nf
+--       simp[pow_two]
+--       horn[ha,hb,hc,h]
+--       sorry
+--     · field_simp
+--       rw[div_le_div_iff₀ (by positivity) (by positivity)]
+--       horn[ha,hb,hc,h]
+--       have imandra_proof : ∀ a b c : ℝ, ((0 ≤ a) → (0 ≤ b) → (0 ≤ c) → (((a + b) + c) ≤ 3) → ((3 * (((1 + a) * (1 + b)) * (1 + c))) ≤ (((((1 + b) + (1 + a)) * (1 + c)) + ((1 + a) * (1 + b))) * 2))) := by
+--         intros a b c
+--         by_contra! goal
+--         rcases goal with ⟨h1, h2, h3, h4, h5⟩
 
 --       --  problem polynomials and their properties from the goal
 --         let prob0 : ℝ := (0 - (0 - a))
@@ -174,6 +174,7 @@ theorem inequalities_124969 (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 
 -- theorem inequalities_1674 (a b c : ℝ) (ha : 0 < a) (hb : 0 < b) (hc : 0 < c) :
 --     2 * (a + b + c)^3 ≥ 3 * (a^2 + b^2 + c^2 + a * b + b * c + c * a) *
 --       Real.sqrt (3 * (a * b + b * c + c * a)) := by
+--   norm_horn (vars := [x1,x2]) (hyps := [hx1,hx2])
 --   horn[ha,hb,hc]
 /-S-expression output:
 (IMPLIES (AND (< 0 a)

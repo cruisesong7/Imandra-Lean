@@ -163,6 +163,7 @@ def normSqrtHyp (fvarId : FVarId) (varNamesRef : IO.Ref (List Name)) (hypNamesRe
     let sqrtTermStx ← Lean.PrettyPrinter.delab sqrtTerm
 
     evalTactic (← `(tactic| set $varIdent := $sqrtTermStx with $hIdent))
+    evalTactic (← `(tactic| have : $varIdent > 0 := by positivity ))
     evalTactic (← `(tactic| rw [← sq_eq_sq₀ (by first | positivity | nlinarith) (by first | positivity | nlinarith)] at ($hIdent)))
     evalTactic (← `(tactic| conv at $hIdent => rhs; rw [Real.sq_sqrt (by first | positivity | nlinarith)]))
 
@@ -182,6 +183,7 @@ def normSqrtTar (varNamesRef : IO.Ref (List Name)) (hypNamesRef : IO.Ref (List N
 
     let sqrtTermStx ← Lean.PrettyPrinter.delab sqrtTerm
     evalTactic (← `(tactic| set $varIdent := $sqrtTermStx with $hIdent))
+    evalTactic (← `(tactic| have : $varIdent ≥ 0 := by unfold $varIdent; positivity ))
     evalTactic (← `(tactic| rw [← sq_eq_sq₀ (by first | positivity | nlinarith) (by first | positivity | nlinarith)] at ($hIdent)))
     evalTactic (← `(tactic| conv at $hIdent => rhs; rw [Real.sq_sqrt (by first | positivity | nlinarith)]))
 
